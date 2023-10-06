@@ -1,51 +1,28 @@
+/*font import*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,400i,700|Roboto+Slab:700');
 @import url('https://fonts.googleapis.com/css2?family=Mulish:200,400,wght@1,1000&display=swap');
 
-/*hide */
-@media screen and (min-width: 768px) {
-    .hamburger {
+/*media part */
+
+@media screen and (max-width: 768px) {
+    aside {
       display: none;
+    }
+    #articles {
+        width: 100%;
+        float: none;
     }
 }
 
 /* General styles */
 a{
-    color:#00A5E3;
+    color:#5eccf1;
 }
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* demander a adnan */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
     margin: 0;
     padding: 0;
-}
-
-nav {
-    background-color: #BDBDBD;
-    color: #000; 
-  
-}
-
-nav a {
-    text-decoration: none;
-    color: #000;
-    padding: 10px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    background-color: #ccc;
-    color: #222;
-}
-
-nav ul {
-    display: inline-block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    display: inline-block;
-    margin: 0 10px;
 }
 
 h1 {
@@ -61,61 +38,99 @@ p {
     line-height: 1.5;
 }
 
+/* nav part */
+.hamburger{
+    justify-content: center;
+    align-items: center;
+    display: flex; 
+}
+@media screen and (min-width: 568px) {
+    .hamburger {
+      display: none;
+    } 
+}
+
+nav {
+    background-color: #BDBDBD;
+    color: #000; 
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background-color: #ccc;
+    color: #222;
+}
+nav ul {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+@media screen and (min-width: 568px){
+    nav ul {
+        flex-direction: row; 
+    }
+}
+/*display the nav bar in column when the screen is smaller than 568px*/
+@media screen and (max-width: 568px){
+    nav ul {
+        flex-direction: column;
+    }
+    nav li {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+
 /* Header styles */
-
-
 header:not(section header) {
     background-image: url('../images/beau-tir-lac-cristallin-cote-base-montagne-enneigee-au-cours-journee-ensoleillee.jpg');
     color: #fff;
     padding-top: 120px;
     background-size: cover;
     background-position: center center;
-    margin: 0;
 }
-
+/* add the text shadow to the h1 and the padding*/
 header h1 {
     padding-left: 20px;
-    text-shadow: -2px -2px 15px rgba(255, 255, 255, 0.5);
+    text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.5);
 }
 
 header li.active a {
     color: #00A5E3;
     background-color: #fff;
 }
-
 header h1 ul {
     background: #686767;
-    padding-left: 10px;
-    height: 30px;
     list-style-type: none;
     overflow: hidden;
-    margin-top: 0px;
-    margin-bottom: 20px;
 }
 header nav li a {
     display: block;
     color: rgb(70, 65, 65);
-    
     text-align: center;
-    
     text-decoration: none;
 }
 
-/* Articles section styles */
-article, aside {
-    display: inline-block;
-    vertical-align: top;
-}
-#articles {
-    width: 60%;
-    text-align: left;
-}
-
-aside {
-    width: 20%;
-    margin: 40px 10px 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+/* Articles and aside section styles */
+@media screen and (min-width: 768px) {
+    #articles {
+        float: left;
+        width: 70%;
+    }
 }
 
 #articles header h2 {
@@ -133,20 +148,16 @@ aside {
     margin: 0;
     display: block;
 }
-section {
-    padding: 20px; /* Add this line to add 20px padding to all section elements */
-}
 /* Aside styles */
-
-aside {
-    width: 20%;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    margin: 40px 0 10px 10px;
+aside{
+    float: right;
+    width: 25%;
+    margin: 0;
     border: 1px solid #ccc;
     border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-  
+
 aside h3 {
     margin: 0 0 0px 0;
     font-size: 1.2em;
@@ -155,7 +166,6 @@ aside h3 {
     background-color: #00A5E3;
     color: #fff;
     padding: 20px;
-
 }
 
 aside ul {
@@ -173,17 +183,11 @@ aside p {
 
 /* main part */
 main{
-    display:   flex;
-    justify-content: center; 
-}
-/* Description section styles */
-.description {
-    background-color: #ccc; 
-}
-
-/* Logbook section styles */
-.logbook {
-    background-color: #fff;
+    display:  block;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 /* Footer styles */
@@ -194,4 +198,20 @@ footer {
     bottom: 0;
     clear: both;
     text-align: right;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+footer {
+    flex-shrink: 0;
 }
