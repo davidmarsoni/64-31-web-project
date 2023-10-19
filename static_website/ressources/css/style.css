@@ -1,18 +1,15 @@
-/*font import*/
+/* Font import */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,400i,700|Roboto+Slab:700');
 @import url('https://fonts.googleapis.com/css2?family=Mulish:200,400,wght@1,1000&display=swap');
 
 /* General styles */
 html, body {
     height: 100%;
-}
-
-body {
-    font-family: Mulish,Arial, Helvetica, sans-serif; 
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
+    font-family: Mulish, Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -20,6 +17,7 @@ h1 {
     font-size: 3em;
     margin-top: 0;
 }
+
 @media screen and (max-width: 768px) {
     h1 {
         font-size: 2em;
@@ -31,6 +29,7 @@ h1 {
         font-size: 1.5em;
     }
 }
+
 h3 {
     font-size: 1.5em;
 }
@@ -38,54 +37,86 @@ h3 {
 p {
     line-height: 1.5;
 }
-a{
-    color:#5eccf1;
-}
-footer {
-    flex-shrink: 0;
+
+a {
+    color: #5eccf1;
 }
 
-
-/* screenshoot part */
-.screenshots{
+/* Screenshoot part */
+.screenshots {
     display: flex;
     flex-direction: row;
 }
+
 .screenshots img:first-child {
     margin-left: 0;
 }
+
 .screenshots img:last-child {
     margin-right: 0;
 }
-.screenshots img{
-    width: 50%;
+
+.screenshots img {
+    width: 33%;
     margin: 10px;
+}
+
+.image{
+    width: 100%;
+    
+}
+/*table part*/
+table{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+}
+th, td{
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+/*la premire colonne doit etre plus petite meme chose pour la dernire colonne*/
+th:first-child{
+    width: 10%;
+}
+th:last-child{
+    width: 20%;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tbody tr:hover{
+    background-color: #ddd;
 }
 @media screen and (max-width: 768px) {
     .screenshots {
-      flex-direction: column;
+        flex-direction: column;
     }
+
     .screenshots img {
-      width: 100%;
-      margin: 5px 0;
+        width: 100%;
+        margin: 5px 0;
     }
 }
 
-/* nav part */
-.hamburger{
+/* navigation part part */
+.hamburger {
     justify-content: center;
     align-items: center;
-    display: flex; 
+    display: flex;
 }
+
 @media screen and (min-width: 568px) {
     .hamburger {
-      display: none;
-    } 
+        display: none;
+    }
 }
 
 nav {
     background-color: #BDBDBD;
-    color: #000; 
+    color: #000;
 }
 
 nav a {
@@ -99,22 +130,25 @@ nav a:hover {
     background-color: #ccc;
     color: #222;
 }
+
 nav ul {
     display: flex;
     align-items: center;
     padding: 0;
     margin: 0;
 }
-@media screen and (min-width: 568px){
+
+@media screen and (min-width: 568px) {
     nav ul {
-        flex-direction: row; 
+        flex-direction: row;
     }
 }
-/*display the nav bar in column when the screen is smaller than 568px*/
-@media screen and (max-width: 568px){
+
+@media screen and (max-width: 568px) {
     nav ul {
         flex-direction: column;
     }
+
     nav li {
         display: block;
         width: 100%;
@@ -126,7 +160,6 @@ nav li {
     display: inline-block;
     margin: 0 10px;
 }
-
 
 /* Header styles */
 header:not(section header) {
@@ -146,11 +179,13 @@ header li.active a {
     color: #00A5E3;
     background-color: #fff;
 }
+
 header h1 ul {
     background: #686767;
     list-style-type: none;
     overflow: hidden;
 }
+
 header nav li a {
     display: block;
     color: rgb(70, 65, 65);
@@ -158,11 +193,16 @@ header nav li a {
     text-decoration: none;
 }
 
+section article header {
+    padding-top: 20px;
+}
+
 /* Articles and aside section styles */
 @media screen and (max-width: 768px) {
     aside {
-      display: none;
+        display: none;
     }
+
     #articles {
         width: 100%;
         float: none;
@@ -172,7 +212,7 @@ header nav li a {
 @media screen and (min-width: 768px) {
     #articles {
         float: left;
-        width: 70%;
+        width: 75%;
     }
 }
 
@@ -191,10 +231,11 @@ header nav li a {
     margin: 0;
     display: block;
 }
+
 /* Aside styles */
-aside{
+aside {
     float: right;
-    width: 25%;
+    width: 20%;
     margin: 0;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -213,7 +254,8 @@ aside h3 {
 
 aside ul {
     list-style-type: none;
-    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 aside li {
@@ -221,12 +263,12 @@ aside li {
 }
 
 aside p {
-    margin: 0;  
+    margin: 0;
 }
 
-/* main part */
-main{
-    display:  block;
+/* Main part */
+main {
+    display: block;
     justify-content: center;
     margin-left: 20px;
     margin-right: 20px;
@@ -235,7 +277,9 @@ main{
 }
 
 /* Footer styles */
+
 footer {
+    flex-shrink: 0;
     background-color: #BDBDBD;
     color: #fff;
     padding: 20px;
@@ -243,4 +287,8 @@ footer {
     clear: both;
     text-align: right;
 }
-
+@media screen and (max-width: 768px) {
+    footer img {
+        width: 50%;
+    }
+}
