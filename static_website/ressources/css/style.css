@@ -41,11 +41,28 @@ p {
 a {
     color: #5eccf1;
 }
-/*boder class*/
+/*border class*/
 .border{
     border: 1px solid #ddd;
     border-radius: 2px;
 }
+
+.menuAndDiagramm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menuAndDiagramm img{
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.menuAndDiagramm .smaller-image{
+    width: 40%;
+}
+
+
 /* Screenshoot part */
 .screenshots {
     display: flex;
@@ -65,9 +82,14 @@ a {
     margin: 10px;
 }
 
+
 .image{
     width: 100%;
     
+}
+
+.screenshots .smaller-image{
+    width: 70%;
 }
 /*sprite part*/
 /*align verical top item inside*/
