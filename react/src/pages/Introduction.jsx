@@ -1,12 +1,11 @@
 import React from 'react'
-import Pages from '../Components/test.jsx'
+import PageRoot from "../components/PageRoot.jsx";
 
 const Introduction = () => {
    return (
       <div>Introduction
-         <Pages pageName={"Intro"} />
+         <PageRoot pageName={"Intro"} />
       </div>
-
    )
 }
 export default Introduction;
