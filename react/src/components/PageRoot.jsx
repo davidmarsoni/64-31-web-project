@@ -1,5 +1,5 @@
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from '../config/firestore.js'
 import { useEffect, useState } from "react";
 import Assembly from "./Assembly";
@@ -59,7 +59,17 @@ const PageRoot = (args) => {
     useEffect(() => {
         if (loadingState === "standingBy"){
             setLoadingState("inProgress")
-            getPageData();
+            //getPageData();
+            async function loadPosts() {
+                const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/posts');
+                if(!response.ok) {
+                    // oups! something went wrong
+                    return;
+                }
+                const posts = await response.json();
+                console.log(posts);
+            }
+            loadPosts();
         }
     });
 
