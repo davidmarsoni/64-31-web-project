@@ -3,73 +3,44 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from '../config/firestore.js'
 import { useEffect, useState } from "react";
 import Assembly from "./Assembly";
+import Error404 from "../pages/Error404";
 
 const PageRoot = (args) => {
+
+    const pagesNames = ["Introduction", "Logbook", "Description", "Result", "Links"]
+    const pagesNumbers = [14]
+    const pageName = args.pageName
+    const pageId = pagesNumbers[pagesNames.indexOf(pageName)]
 
     const [title, setTitle] = useState("")
     const [subtitle, setSubtitle] = useState("")
     const [content, setContent] = useState([])
     const [loadingState, setLoadingState] = useState("standingBy")
 
-    let sectionsData = null;
-    let useEffectDone = false;
-    let page = [];
-
-    const getPageData = async () => {
-        const docRef = doc(db, "pages", args.pageName);
-        const interestPage = await getDoc(docRef);
-        const interestPageData = interestPage.data();
-        setTitle(interestPageData.title);
-        setSubtitle(interestPageData.subtitle);
-
-        // gather the subcollection "articles" from the document "Intro"
-        const sections = await getDocs(collection(db, "pages", interestPage.id, "sections"));
-        sectionsData = sections.docs.map(doc => ({id: doc.id, ...doc.data()}));
-        // concat the content of each article in the html variable
-        console.log("sections", sectionsData)
-        for (const sectionId in sectionsData) {
-            const section = sectionsData[sectionId];
-            let contentId = 0;
-            while (section[contentId] != null) {
-                let sectionData = section[contentId];
-                let sectionSplit = sectionData.split(":");
-                console.log(section[contentId])
-                if (sectionSplit[0] === "img") {
-                    if (sectionSplit[1] === "firebase") {
-                        // the content is the image in firebase
-                        let trueLink = sectionData.substring(sectionSplit[0].length + sectionSplit[1].length + 2, sectionData.length);
-                        let imgRef = ref(storage, trueLink);
-                        let imgURL = await getDownloadURL(imgRef);
-                        addToContent("img", imgURL);
-                    } else {
-                        // the content is a link to an image
-                        let trueLink = sectionData.substring(sectionSplit[0].length + 1, sectionData.length);
-                        addToContent("img", trueLink);
-                    }
-                } else {
-                    // the content is html code
-                    addToContent("html", sectionData);
-                }
-                contentId++;
-            }
+    const loadPage = async () => {
+        console.log(pageId)
+        const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/pages/' + pageId);
+        if(!response.ok) {
+            // oups! something went wrong
+            return;
         }
+        const post = await response.json();
+        console.log(post.content.rendered);
+        setContent(post.content.rendered)
         setLoadingState("done")
     }
 
     useEffect(() => {
         if (loadingState === "standingBy"){
             setLoadingState("inProgress")
-            //getPageData();
-            async function loadPosts() {
-                const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/posts');
-                if(!response.ok) {
-                    // oups! something went wrong
-                    return;
-                }
-                const posts = await response.json();
-                console.log(posts);
-            }
-            loadPosts();
+            loadPage().then(response => {
+                console.log(response);
+            });
+            /*if (pageId !== undefined) {
+                return (
+                    <Error404 />
+                )
+            }*/
         }
     });
 
@@ -90,13 +61,7 @@ const PageRoot = (args) => {
     return (
         <>
             <div>
-                <h1>{title}</h1>
-                <h2>{subtitle}</h2>
-                {noPageContent()}
-                {content.map(value => {
-                    console.log(value.key, value.type, value.data);
-                    return <Assembly key={value.key} type={value.type} data={value.data}/>
-                })}
+                <div dangerouslySetInnerHTML={{__html: content}}></div>
             </div>
         </>
     )
