@@ -64,7 +64,7 @@ const PageRoot = (args) => {
     });
 
     const noPageContent = () => {
-        return content.length === 0 && <div>No content found</div>
+        return content.length === 0 && <div>No content found.</div>
     }
 
     const addToContent = (type = "", data) => {

@@ -3,7 +3,7 @@ import PageRoot from "../components/PageRoot.jsx";
 
 const Introduction = () => {
    return (
-      <div>Introduction
+      <div>
          <PageRoot pageName={"Intro"} />
       </div>
    )

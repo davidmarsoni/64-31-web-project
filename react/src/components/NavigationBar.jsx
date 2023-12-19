@@ -1,34 +1,43 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import './NavigationBar.css'
-import Logo from '../assets/favicon.jpg'
+import { Link, useLocation } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import {Nav} from "react-bootstrap";
 
+const NavigationBar = () => {
+   const location = useLocation().pathname;
 
-function NavigationBar() {
+   function isActive(path) {
+      if (path === location) {
+         return ("disabled")
+      } else {
+         return ("")
+      }
+   }
+
    return (
-      <div style={{ textAlign: "center", marginBottom: 10, }}>
-         <ul>
-            <li>
-               <img src={Logo} alt="Logo" style={{ width: 50, height: 50, marginRight: 10 }} />
-               <Link to="/">Home</Link>
-            </li>
-            <li>
-               <Link to="/Introduction">Introduction</Link>
-            </li>
-            <li>
-               <Link to="/Logbook">Logbook</Link>
-            </li>
-            <li>
-               <Link to="/Description">Description</Link>
-            </li>
-            <li>
-               <Link to="/Result">Result</Link>
-            </li>
-            <li>
-               <Link to="/Links">Links</Link>
-            </li>
-         </ul>
-      </div>
+       <Navbar className="bg-body-tertiary">
+          <Container>
+             <Navbar.Brand><Link className={"nav-link" + isActive("/")} aria-current="page" to={"/"}>Home</Link></Navbar.Brand>
+             <Navbar.Toggle />
+             <Nav className="me-auto">
+                <Nav.Link>
+                   <Link className={"nav-link"} to={"/Introduction"}>Introduction</Link>
+                </Nav.Link>
+                <Nav.Link>
+                   <Link className={"nav-link"} to={"/Logbook"}>Logbook</Link>
+                </Nav.Link>
+                <Nav.Link>
+                   <Link className={"nav-link"} to={"/Description"}>Description</Link>
+                </Nav.Link>
+                <Nav.Link>
+                   <Link className={"nav-link"} to={"/Result"}>Result</Link>
+                </Nav.Link>
+                <Nav.Link>
+                   <Link className={"nav-link"} to={"/Links"}>Links</Link>
+                </Nav.Link>
+             </Nav>
+          </Container>
+       </Navbar>
    )
 }
 
