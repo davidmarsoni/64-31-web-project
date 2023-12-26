@@ -1,31 +1,60 @@
+// dompurifier
+import {Col, Row, Table} from "react-bootstrap";
 
+const DOMPurify = require('dompurify')(window);
 
 const Assembly = (args) => {
-    switch (args.type) {
-        case "title":
+
+    const table = (args) => {
+        // replace everything until the first <tbody> tag
+        let content = args.content.replace(/[\s\S]*<tbody>/, "");
+        // replace everything after the last </tbody> tag
+        content = content.replace(/<\/tbody>[\s\S]*/, "");
+        // return the table
+        return (
+            <Table striped bordered hover className={"text-lg-start"}>
+                <tbody dangerouslySetInnerHTML={{__html: content}}></tbody>
+            </Table>
+        )
+    }
+
+
+    // exec
+    if (args.content === undefined) {
+        return (
+            <></>
+        )
+    } else {
+
+        let html = DOMPurify.sanitize(args.content);
+        let rowClasses = "d-flex justify-content-center";
+        let colClasses = "col-6";
+        let colsm = "6";
+        let elementClasses = "";
+
+        if(args.content.includes("wp-image-")){
+            colClasses = "";
+            colsm = "12";
+        }
+
+        if(args.content.includes("wp-block-table")){
+            // process the table with the table function
             return (
-                <h1>{args.data}</h1>
+                <Row className={rowClasses}>
+                    <Col className={colClasses} md={"8"} sm={"12"} xs={"12"} >
+                        {table(args)}
+                    </Col>
+                </Row>
             );
-        case "subtitle":
-            return (
-                <h2>{args.data}</h2>
-            );
-        case "text":
-            return (
-                <p>{args.data}</p>
-            );
-        case "img":
-            return (
-                <img src={args.data} alt="img"></img>
-            );
-        case "html":
-            return (
-                <div dangerouslySetInnerHTML={{__html: args.data}}></div>
-            );
-        default:
-            return (
-                <p>error</p>
-            );
+        }
+
+        return (
+            <Row className={rowClasses}>
+                <Col className={colClasses} sm={colsm} xs={"12"}>
+                    <div dangerouslySetInnerHTML={{__html: html}} className={elementClasses}></div>
+                </Col>
+            </Row>
+        )
     }
 }
 

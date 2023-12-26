@@ -15,11 +15,10 @@ const NavigationBar = () => {
    }
 
    return (
-       <Navbar className="bg-body-tertiary">
+       <Navbar className="bg-body-tertiary" sticky="top">
           <Container>
-             <Navbar.Brand></Navbar.Brand>
              <Navbar.Toggle />
-             <Nav className="me-auto">
+             <Nav className="m-auto">
                 <Nav.Link>
                      <Link className={"nav-link"} to={"/"}>Home</Link>
                 </Nav.Link>

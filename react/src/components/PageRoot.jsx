@@ -5,15 +5,25 @@ import { useEffect, useState } from "react";
 import Assembly from "./Assembly";
 import Error404 from "../pages/Error404";
 
+// React Bootstrap
+import {Col, Row} from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+
+// CSS
+import "./PageRoot.css"
+
+
+// dompurifier
+const DOMPurify = require('dompurify')(window);
+
 const PageRoot = (args) => {
 
-    const pagesNames = ["Introduction", "Logbook", "Description", "Result", "Links"]
-    const pagesNumbers = [14]
+    const pagesNames = ["Introduction", "Logbook", "Description", "Result", "Links", "Home"]
+    const pagesNumbers = [14, 34, 36, 38, 40, 42]
     const pageName = args.pageName
     const pageId = pagesNumbers[pagesNames.indexOf(pageName)]
 
     const [title, setTitle] = useState("")
-    const [subtitle, setSubtitle] = useState("")
     const [content, setContent] = useState([])
     const [loadingState, setLoadingState] = useState("standingBy")
 
@@ -25,17 +35,27 @@ const PageRoot = (args) => {
             return;
         }
         const post = await response.json();
-        console.log(post.content.rendered);
-        setContent(post.content.rendered)
+        console.log(post)
+        setTitle(post.title.rendered)
+
+        // Process the content
+        // Remove the \n, \n\n\n and \n\n\n\n
+        let processedContent = post.content.rendered.replaceAll("\n\n\n\n", "\n")
+        processedContent = processedContent.replaceAll("\n\n\n", "\n")
+        processedContent = processedContent.replaceAll("\n\n", "\n")
+
+        // Separate the content by \n
+        processedContent = processedContent.split("\n")
+
+        console.log(processedContent)
+        setContent(processedContent)
         setLoadingState("done")
     }
 
     useEffect(() => {
         if (loadingState === "standingBy"){
             setLoadingState("inProgress")
-            loadPage().then(response => {
-                console.log(response);
-            });
+            loadPage();
             /*if (pageId !== undefined) {
                 return (
                     <Error404 />
@@ -44,25 +64,41 @@ const PageRoot = (args) => {
         }
     });
 
-    const noPageContent = () => {
-        return content.length === 0 && <div>No content found.</div>
-    }
-
-    const addToContent = (type = "", data) => {
-        const element = {
-            key: content.length,
-            type: type,
-            data: data
+    const message = () => {
+        if (loadingState === "standingBy") {
+            return (
+                <p>Standing by</p>
+            )
+        } else if (loadingState === "inProgress") {
+            return (
+                <p>Loding in progress</p>
+            )
+        } else if (loadingState === "done") {
+            if (content.length === 0) {
+                return (
+                    <p>The content is unavailable</p>
+                )
+            } else {
+                return (
+                    <></>
+                )
+            }
         }
-        content.push(element)
-        console.log("added : " + type + " , " + data)
     }
 
     return (
         <>
-            <div>
-                <div dangerouslySetInnerHTML={{__html: content}}></div>
-            </div>
+            {message()}
+            <h1>{title}</h1>
+            <Container fluid="true">
+                {
+                    content.map(content => {
+                        return (
+                            <Assembly content={content} />
+                        )
+                    })
+                }
+            </Container>
         </>
     )
 }

@@ -1,8 +1,11 @@
 import React from 'react'
+import PageRoot from "../components/PageRoot";
 
 const Description = () => {
    return (
-      <div>Description</div>
+       <div>
+          <PageRoot pageName={"Description"}/>
+       </div>
    )
 }
 
