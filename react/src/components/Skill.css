@@ -1,0 +1,42 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    /*border: 3px solid #000000; 
+    */
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+  
+  .content {
+    display: flex;
+  }
+  
+  .subContainer {
+    width: 50%;
+    margin: 0 none;
+    border: 3px solid rgb(194, 218, 240);
+    background-color: aliceblue;
+    padding: 20px;
+  }
+
+  .des{
+    border-color: #0a0541;
+
+    background-color: rgb(219, 234, 255);
+  }
+  
+  .image {
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  

@@ -10,9 +10,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const bootstrap = require('bootstrap')
 root.render(
-  <React.StrictMode>
       <Layout />
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
