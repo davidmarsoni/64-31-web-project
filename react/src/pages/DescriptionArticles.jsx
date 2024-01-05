@@ -6,7 +6,8 @@ const DOMPurify = require('dompurify')(window);
 const DescriptionArticles = () => {
     const [content, setContent] = useState([])
     const [loadingState, setLoadingState] = useState("standingBy")
-    const postsNumbers = [86,68]
+    //this is the article post number in the URL. it's in the order from top to bottom
+    const postsNumbers = [86,68,111,106]
 
     const loadPosts = async () => {
         console.log("loadPosts")
