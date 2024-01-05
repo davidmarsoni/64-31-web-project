@@ -23,6 +23,7 @@ const PageRoot = (args) => {
         const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/pages/' + pageId);
         if(!response.ok) {
             // oups! something went wrong
+            setLoadingState("error")
             return;
         }
         const post = await response.json();
@@ -56,7 +57,7 @@ const PageRoot = (args) => {
                 <p>Loading in progress</p>
             )
         } else if (loadingState === "done") {
-            if (content.length === 0) {
+            if (loadingState === "error") {
                 return (
                     <p>The content is unavailable</p>
                 )

@@ -21,4 +21,9 @@ const removeEmptyLines = (array) => {
     });
 }
 
+const searchImageSrc = (imageHTML) => {
+    return imageHTML.match(/src="([^"]*)"/)[1];
+}
+
 export default apiProcessor;
+export {searchImageSrc};

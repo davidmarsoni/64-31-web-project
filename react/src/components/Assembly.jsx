@@ -1,4 +1,5 @@
-import {Col, Row, Table} from "react-bootstrap";
+import {Col, Image, Row, Table} from "react-bootstrap";
+import {searchImageSrc} from "./apiProcessor.js";
 
 // dompurifier
 const DOMPurify = require('dompurify')(window);
@@ -35,6 +36,13 @@ const Assembly = (args) => {
         if(args.content.includes("wp-image-")){
             colClasses = "";
             colsm = "12";
+            return (
+                <Row className={rowClasses}>
+                    <Col className={colClasses} sm={colsm}>
+                        <Image fluid src={searchImageSrc(args.content)} />
+                    </Col>
+                </Row>
+            )
         }
 
         if(args.content.includes("wp-block-table")){

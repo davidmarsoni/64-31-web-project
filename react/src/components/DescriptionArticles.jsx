@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Skill from './Skill.js';
 import apiProcessor from "./apiProcessor.js";
+import {searchImageSrc} from "./apiProcessor.js";
 
 const DescriptionArticles = () => {
     const [content, setContent] = useState([])
@@ -21,7 +22,7 @@ const DescriptionArticles = () => {
 
             let stripedContent = stripHtml(processedContent);
             let imageHTML = processedContent[processedContent.length - 1]
-            let image = imageHTML.match(/src="([^"]*)"/)[1];
+            let image = searchImageSrc(imageHTML)
 
             // Useable data
             let array = []
