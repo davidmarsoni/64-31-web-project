@@ -1,6 +1,6 @@
-// dompurifier
 import {Col, Row, Table} from "react-bootstrap";
 
+// dompurifier
 const DOMPurify = require('dompurify')(window);
 
 const Assembly = (args) => {

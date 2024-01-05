@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import {Nav} from "react-bootstrap";
+import {Nav, NavItem} from "react-bootstrap";
 
 const NavigationBar = () => {
    const location = useLocation().pathname;
@@ -15,29 +15,31 @@ const NavigationBar = () => {
    }
 
    return (
-       <Navbar className="bg-body-tertiary" sticky="top">
+       <Navbar className="bg-body-tertiary" sticky="top" collapseOnSelect expand="sm">
           <Container>
-             <Navbar.Toggle />
-             <Nav className="m-auto">
-                <Nav.Link>
-                     <Link className={"nav-link"} to={"/"}>Home</Link>
-                </Nav.Link>
-                <Nav.Link>
-                   <Link className={"nav-link"} to={"/Introduction"}>Introduction</Link>
-                </Nav.Link>
-                <Nav.Link>
-                   <Link className={"nav-link"} to={"/Logbook"}>Logbook</Link>
-                </Nav.Link>
-                <Nav.Link>
-                   <Link className={"nav-link"} to={"/Description"}>Description</Link>
-                </Nav.Link>
-                <Nav.Link>
-                   <Link className={"nav-link"} to={"/Result"}>Result</Link>
-                </Nav.Link>
-                <Nav.Link>
-                   <Link className={"nav-link"} to={"/Links"}>Links</Link>
-                </Nav.Link>
-             </Nav>
+             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+             <Navbar.Collapse>
+                <Nav className="m-auto">
+                      <NavItem>
+                         <Link className={"nav-link"} to={"/"}>Home</Link>
+                      </NavItem>
+                      <NavItem>
+                         <Link className={"nav-link"} to={"/Introduction"}>Introduction</Link>
+                      </NavItem>
+                      <NavItem>
+                         <Link className={"nav-link"} to={"/Logbook"}>Logbook</Link>
+                      </NavItem>
+                      <NavItem>
+                      <Link className={"nav-link"} to={"/Description"}>Description</Link>
+                     </NavItem>
+                     <NavItem>
+                      <Link className={"nav-link"} to={"/Result"}>Result</Link>
+                     </NavItem>
+                     <NavItem>
+                        <Link className={"nav-link"} to={"/Links"}>Links</Link>
+                     </NavItem>
+                </Nav>
+             </Navbar.Collapse>
           </Container>
        </Navbar>
    )

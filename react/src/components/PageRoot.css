@@ -6,3 +6,13 @@
 .container-true h3{
     padding-top: 20px;
 }
+
+.homelink{
+    font-size: 20px;
+    color: #000000;
+}
+
+div:has(.homelink){
+    display: inherit;
+    margin: 5px 0px;
+}

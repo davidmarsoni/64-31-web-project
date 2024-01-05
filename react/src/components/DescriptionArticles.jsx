@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Skill from '../components/Skill.js';
-
-const DOMPurify = require('dompurify')(window);
+import Skill from './Skill.js';
+import apiProcessor from "./apiProcessor.js";
 
 const DescriptionArticles = () => {
     const [content, setContent] = useState([])
     const [loadingState, setLoadingState] = useState("standingBy")
     //this is the article post number in the URL. it's in the order from top to bottom
-    const postsNumbers = [86,68,111,106]
+    const postsNumbers = [68,111,106]
 
     const loadPosts = async () => {
-        console.log("loadPosts")
-        
         for (const postNumber of postsNumbers) {
             const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/posts/' + postNumber);
             if(!response.ok) {
@@ -20,15 +17,7 @@ const DescriptionArticles = () => {
             }
             const post = await response.json();
     
-            // Process the content
-            // Remove the \n, \n\n\n and \n\n\n\n
-            let processedContent = post.content.rendered.replaceAll("\n\n\n\n", "\n")
-            processedContent = processedContent.replaceAll("\n\n\n", "\n")
-            processedContent = processedContent.replaceAll("\n\n", "\n")
-    
-            // Separate the content by \n
-            processedContent = DOMPurify.sanitize(processedContent).split("\n")
-            processedContent = removeEmptyLines(processedContent)
+            let processedContent = apiProcessor(post.content.rendered)
 
             let stripedContent = stripHtml(processedContent);
             let imageHTML = processedContent[processedContent.length - 1]
@@ -53,7 +42,6 @@ const DescriptionArticles = () => {
     }
     
     useEffect(() => {
-        console.log("useEffect")
         if (loadingState === "standingBy"){
             setLoadingState("inProgress")
             loadPosts();
@@ -61,15 +49,15 @@ const DescriptionArticles = () => {
     }, []);
     return (
         <div className="description-articles">   {
-            content.map(content => {
-                console.log("MON CONTENT",content)
+            content.map( (content, key) => {
                 return (
-                <Skill 
-                title={content[0]}
-                description={content[4]}
-                file={content[1]}
-                fileLine={content[2]}
-                finalImage={content[3]}
+                <Skill
+                    key={key}
+                    title={content[0]}
+                    description={content[4]}
+                    file={content[1]}
+                    fileLine={content[2]}
+                    finalImage={content[3]}
                 />
                 )
             })
@@ -85,12 +73,6 @@ const DescriptionArticles = () => {
     return htmlArray.map(htmlString => {
         const doc = new DOMParser().parseFromString(htmlString, 'text/html');
         return doc.body.textContent || "";
-    });
- }
-
- const removeEmptyLines = (array) => {
-    return array.filter((line) => {
-        return line !== "";
     });
  }
 export default DescriptionArticles;
