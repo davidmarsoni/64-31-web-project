@@ -4,6 +4,8 @@
     /*border: 3px solid #000000; 
     */
     padding: 20px;
+    overflow-wrap: break-word;
+    
   }
   
   .title {
@@ -22,21 +24,39 @@
   .subContainer {
     width: 50%;
     margin: 0 none;
-    border: 3px solid rgb(194, 218, 240);
-    background-color: aliceblue;
+    border: 3px solid  rgb(238, 238, 238);
+    background-color: white;
     padding: 20px;
   }
 
   .des{
     border-color: #0a0541;
 
-    background-color: rgb(219, 234, 255);
+    background-color: rgb(247, 247, 247);
   }
   
-  .image {
+  .aside {
     max-width: 50%;
     margin-left: auto;
     margin-right: 0;
     margin-bottom: 20px;
   }
-  
+.image{
+  max-width: 100%;
+  height: auto;
+}
+
+/* Media query for small screens */
+@media (max-width: 1000px) {
+  .content {
+    flex-direction: column; /* Stack items vertically on small screens */
+  }
+  .subContainer {
+    width: 100%;
+  }
+
+  .aside {
+    max-width: 100%; /* Take up the full width on small screens */
+    margin: 0 auto; /* Center the aside */
+  }
+}

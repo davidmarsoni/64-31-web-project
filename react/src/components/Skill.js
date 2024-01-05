@@ -15,8 +15,8 @@ function Skill({ title, description, file, fileLine, finalImage }) {
             <p><strong>File:</strong> {file}</p>  
             <p><strong> Line:</strong>  {fileLine}</p>
           </div>
-          <aside className="image">
-            <img src={finalImage} alt="Image" />
+          <aside className="aside">
+            <img src={finalImage} alt="Image" className='image' />
           </aside>
         </div>
       </fieldset>

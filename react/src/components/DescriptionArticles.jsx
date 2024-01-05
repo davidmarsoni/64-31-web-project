@@ -6,7 +6,7 @@ const DescriptionArticles = () => {
     const [content, setContent] = useState([])
     const [loadingState, setLoadingState] = useState("standingBy")
     //this is the article post number in the URL. it's in the order from top to bottom
-    const postsNumbers = [68,111,106]
+    const postsNumbers = [86,68,111,106,122,135,139,173,142,145,148,151,154,157,160,163,167,170]
 
     const loadPosts = async () => {
         for (const postNumber of postsNumbers) {
