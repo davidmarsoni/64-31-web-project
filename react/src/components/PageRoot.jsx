@@ -39,11 +39,6 @@ const PageRoot = (args) => {
         if (loadingState === "standingBy"){
             setLoadingState("inProgress")
             loadPage();
-            /*if (pageId !== undefined) {
-                return (
-                    <Error404 />
-                )
-            }*/
         }
     });
 
@@ -57,15 +52,17 @@ const PageRoot = (args) => {
                 <p>Loading in progress</p>
             )
         } else if (loadingState === "done") {
-            if (loadingState === "error") {
-                return (
-                    <p>The content is unavailable</p>
-                )
-            } else {
-                return (
-                    <></>
-                )
-            }
+            return (
+                <></>
+            )
+        } else if (loadingState === "error") {
+            return (
+                <p>The content is unavailable</p>
+            )
+        } else {
+            return (
+                <></>
+            )
         }
     }
 

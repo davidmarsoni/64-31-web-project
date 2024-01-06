@@ -8,9 +8,13 @@ const DescriptionArticles = () => {
     const [loadingState, setLoadingState] = useState("standingBy")
     //this is the article post number in the URL. it's in the order from top to bottom
     const postsNumbers = [68,111,106,122,135,139,173,142,145,148,151,154,157,160,163,167,170]
+    //progressive loading
+    let count = 0;
 
     const loadPosts = async () => {
         for (const postNumber of postsNumbers) {
+            count++;
+            setLoadingState("inProgress " + count)
             const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/posts/' + postNumber);
             if(!response.ok) {
                 // oups! something went wrong
@@ -48,23 +52,23 @@ const DescriptionArticles = () => {
             loadPosts();
         }
     }, []);
-    return (
-        <div className="description-articles">   {
-            content.map( (content, key) => {
-                return (
-                <Skill
-                    key={key}
-                    title={content[0]}
-                    description={content[4]}
-                    file={content[1]}
-                    fileLine={content[2]}
-                    finalImage={content[3]}
-                />
-                )
-            })
 
-        }     
-    
+    return (
+        <div className="description-articles">
+            {
+                content.map( (content, key) => {
+                    return (
+                    <Skill
+                        key={key}
+                        title={content[0]}
+                        description={content[4]}
+                        file={content[1]}
+                        fileLine={content[2]}
+                        finalImage={content[3]}
+                    />
+                    )
+                })
+            }
        </div>
     );
 };
