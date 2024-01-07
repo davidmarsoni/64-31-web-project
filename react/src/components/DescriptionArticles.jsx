@@ -3,6 +3,9 @@ import Skill from './Skill.js';
 import apiProcessor from "./apiProcessor.js";
 import {searchImageSrc} from "./apiProcessor.js";
 
+// Site API
+const postsAPI = "https://62-31-web.marsoni.ch/wp-json/wp/v2/posts/"
+
 const DescriptionArticles = () => {
     const [content, setContent] = useState([])
     const [loadingState, setLoadingState] = useState("standingBy")
@@ -15,7 +18,7 @@ const DescriptionArticles = () => {
         for (const postNumber of postsNumbers) {
             count++;
             setLoadingState("inProgress " + count)
-            const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/posts/' + postNumber);
+            const response = await fetch(postsAPI + postNumber);
             if(!response.ok) {
                 // oups! something went wrong
                 return;

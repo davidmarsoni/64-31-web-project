@@ -8,6 +8,9 @@ import Container from "react-bootstrap/Container";
 // CSS
 import "./PageRoot.css"
 
+// Site API
+const pagesAPI = "https://62-31-web.marsoni.ch/wp-json/wp/v2/pages/"
+
 const PageRoot = (args) => {
 
     const pagesNames = ["Introduction", "Logbook", "Description", "Result", "Links", "Home"]
@@ -20,7 +23,7 @@ const PageRoot = (args) => {
     const [loadingState, setLoadingState] = useState("standingBy")
 
     const loadPage = async () => {
-        const response = await fetch('https://62-31-web.marsoni.ch/wp-json/wp/v2/pages/' + pageId);
+        const response = await fetch(pagesAPI + pageId);
         if(!response.ok) {
             // oups! something went wrong
             setLoadingState("error")
